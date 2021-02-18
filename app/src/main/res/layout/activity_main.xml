@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="Choose Secret Number"
+            android:text="@string/choose_secret_number"
         />
 
 
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:ems="10"
-            android:hint="Guess the number"
+            android:hint="@string/guess_the_number"
             android:inputType="phone" />
 
         <Button
@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="Check" />
+            android:text="@string/check" />
 
         <TextView
             android:id="@+id/idTextView2"
