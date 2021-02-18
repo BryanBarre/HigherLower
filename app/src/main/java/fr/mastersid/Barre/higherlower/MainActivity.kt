@@ -27,13 +27,11 @@ class MainActivity : AppCompatActivity() {
             when (secretNumber) {
                 binding.idGuessNumber.text.toString() -> Toast.makeText(this, "correct", Toast.LENGTH_SHORT).show()
                 else -> { // Note the block
-                    Toast.makeText(this, "incorect", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "non", Toast.LENGTH_SHORT).show()
                 }
             }
         }
     }
-
-
 
 
 }
