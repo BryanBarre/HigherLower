@@ -1,6 +1,5 @@
 package fr.mastersid.Barre.higherlower
 
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
@@ -19,18 +18,20 @@ class SecretNumberModel: ViewModel() {
     }
     val checkResult = MutableLiveData(CheckResult.NO_GUESS)
 
-    fun Check(number:Int){
-        if (secretNumber.value == NO_SECRET_NUMBER){
-            checkResult.value=CheckResult.NO_GUESS
-        }
-        else if (number<secretNumber.value.toString().toInt()){
-            checkResult.value=CheckResult.GREATER
-        }
-        else if (number>secretNumber.value.toString().toInt()){
-            checkResult.value=CheckResult.LOWER
-        }
-        else {
-            checkResult.value = CheckResult.EQUAL
+    fun check(number:Int){
+        when {
+            secretNumber.value == NO_SECRET_NUMBER -> {
+                checkResult.value=CheckResult.NO_GUESS
+            }
+            number<secretNumber.value.toString().toInt() -> {
+                checkResult.value=CheckResult.GREATER
+            }
+            number>secretNumber.value.toString().toInt() -> {
+                checkResult.value=CheckResult.LOWER
+            }
+            else -> {
+                checkResult.value = CheckResult.EQUAL
+            }
         }
     }
 

@@ -3,4 +3,5 @@
     <string name="choose_secret_number">Choose Secret Number</string>
     <string name="guess_the_number">Guess the number</string>
     <string name="check">Check</string>
+    <string name="roll_dice_button_text">roll_dice_button_text</string>
 </resources>
