@@ -26,18 +26,28 @@ class SecretNumberFragment: Fragment() {
         super.onViewCreated (view , savedInstanceState )
 
         val  secretNumberModel: SecretNumberModel by viewModels()
-
+        _binding.idGuessNumber.setTransformationMethod (null);
         _binding.idChooseNumber.setOnClickListener {
             secretNumberModel.chooseSecretNumber()
-            _binding.idTextView1.text = "Secret number chosen"
+        }
+        secretNumberModel.secretNumber.observe(viewLifecycleOwner){///////////////////reproduire cette observer pour le textwiev 2
+            value->if (value==SecretNumberModel.NO_SECRET_NUMBER){
+                _binding.idTextView1.visibility=View.INVISIBLE
+        }else{
+            _binding.idTextView1.visibility=View.VISIBLE
+            _binding.idTextView1.text="Secret number chosen"
+        }
+
         }
         _binding.idButtonCheck.setOnClickListener {
+
             if (secretNumberModel.secretNumber.value.toString()=="-1") {
                 Toast.makeText(this.context, "First  press  \"Choose  secretnumber\"  button", Toast.LENGTH_SHORT).show()
             }
             else {
                 try {
                     secretNumberModel.check(_binding.idGuessNumber.text.toString().toInt())
+
                     if (secretNumberModel.checkResult.value.toString()=="EQUAL")
                         _binding.idTextView2.text = "Well done"
                     if (secretNumberModel.checkResult.value.toString()=="GREATER")
@@ -51,39 +61,3 @@ class SecretNumberFragment: Fragment() {
         }
     }
 }
-/*
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        val binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        val  secretNumberModel: SecretNumberModel by viewModels()
-
-        binding.idChooseNumber.setOnClickListener {
-            secretNumberModel.chooseSecretNumber()
-            binding.idTextView1.text = "Secret number chosen"
-        }
-
-        binding.idButtonCheck.setOnClickListener {
-            if (secretNumberModel.secretNumber.value.toString()=="-1") {
-                Toast.makeText(this, "First  press  \"Choose  secretnumber\"  button", Toast.LENGTH_SHORT).show()
-            }
-            else {
-                try {
-                    secretNumberModel.check(binding.idGuessNumber.text.toString().toInt())
-                    if (secretNumberModel.checkResult.value.toString()=="EQUAL")
-                        binding.idTextView2.text = "Well done"
-                    if (secretNumberModel.checkResult.value.toString()=="GREATER")
-                        binding.idTextView2.text = "The secret number is greater"
-                    if (secretNumberModel.checkResult.value.toString()=="LOWER")
-                        binding.idTextView2.text = "The secret number is lower"
-                } catch (error: NumberFormatException) {
-                    Toast.makeText(this, "Incorrect number", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-    }
-}
- */

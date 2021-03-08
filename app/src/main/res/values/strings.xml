@@ -4,4 +4,8 @@
     <string name="guess_the_number">Guess the number</string>
     <string name="check">Check</string>
     <string name="roll_dice_button_text">roll_dice_button_text</string>
+    <string name="play">Play</string>
+    <string name="enter_a_number">Enter a number</string>
+    <string name="turns">Turns</string>
+    <string name="secret_number_is_from_1_to">Secret number is from 1 to</string>
 </resources>
