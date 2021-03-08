@@ -5,49 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <fragment
+        android:id="@+id/fragmentSecretNumber"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/idChooseNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="@string/choose_secret_number"
-        />
-
-
-        <TextView
-            android:id="@+id/idTextView1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp" />
-
-        <EditText
-            android:id="@+id/idGuessNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:ems="10"
-            android:hint="@string/guess_the_number"
-            android:inputType="phone"
-            android:autofillHints="" />
-
-        <Button
-            android:id="@+id/idButtonCheck"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="@string/check" />
-
-        <TextView
-            android:id="@+id/idTextView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp" />
-
-    </LinearLayout>
-
+        android:name="fr.mastersid.Barre.higherlower.SecretNumberFragment"
+        tools:layout="@layout/fragment_secretnumber"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
