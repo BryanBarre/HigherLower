@@ -33,7 +33,10 @@ class SettingsFragment:Fragment() {
         _binding.idTurns.setTransformationMethod (null);
 
         _binding.idPlay.setOnClickListener {
-            findNavController(). navigate (R.id.action_settingsFragment_to_secretNumberFragment)
+            val turns = _binding.idTurns.text.toString().toInt()
+            val max = _binding.idSecretNumbeMaxValue.text.toString().toInt()
+            val action = SettingsFragmentDirections.actionSettingsFragmentToSecretNumberFragment(turns,max)
+            findNavController().navigate(action)
         }
      }
 }

@@ -10,8 +10,8 @@ class SecretNumberModel: ViewModel() {
 
 
     val  secretNumber = MutableLiveData(NO_SECRET_NUMBER)
-    fun chooseSecretNumber(){
-        secretNumber.value=(1..100).random()
+    fun chooseSecretNumber(max: Int) {
+        secretNumber.value=(1..max).random()
     }
     enum class CheckResult {
         LOWER, GREATER, EQUAL,NO_GUESS
