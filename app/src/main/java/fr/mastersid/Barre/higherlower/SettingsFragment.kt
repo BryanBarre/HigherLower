@@ -25,13 +25,9 @@ class SettingsFragment:Fragment() {
         _binding = FragmentSettingsBinding.inflate(inflater)
         return _binding.root
     }
+
     override fun onViewCreated (view : View, savedInstanceState : Bundle?) {
         super.onViewCreated (view , savedInstanceState )
-
-        val  SecretNumberModel: SecretNumberModel by viewModels()
-        _binding.idSecretNumbeMaxValue.setTransformationMethod (null);
-        _binding.idTurns.setTransformationMethod (null);
-
         _binding.idPlay.setOnClickListener {
             val turns = _binding.idTurns.text.toString().toInt()
             val max = _binding.idSecretNumbeMaxValue.text.toString().toInt()
