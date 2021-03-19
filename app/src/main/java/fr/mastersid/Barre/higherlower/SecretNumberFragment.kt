@@ -15,7 +15,6 @@ import fr.mastersid.Barre.higherlower.databinding.FragmentSecretnumberBinding
  * Created by Bryan BARRE on 08/03/2021.
  */
 class SecretNumberFragment: Fragment() {
-var cpt=0
     private lateinit var _binding : FragmentSecretnumberBinding
     override fun onCreateView (
         inflater : LayoutInflater,
@@ -28,8 +27,8 @@ var cpt=0
 
 
     override fun onViewCreated ( view : View , savedInstanceState : Bundle ?) {
-        super.onViewCreated (view , savedInstanceState )
         _binding.idGuessNumber.setTransformationMethod (null);
+        super.onViewCreated (view , savedInstanceState )
         val args : SecretNumberFragmentArgs by navArgs()
         val  secretNumberModel: SecretNumberModel by viewModels(
                 factoryProducer = { SecretNumberfactory (this , args.turns ,args.max) })
@@ -38,9 +37,10 @@ var cpt=0
 
         _binding.idChooseNumber.setOnClickListener {
             secretNumberModel.chooseSecretNumber()
+            _binding.idChooseNumber.isEnabled=false
+            _binding.idButtonCheck.isEnabled=true
         }
         _binding.idButtonCheck.setOnClickListener {
-
             if (secretNumberModel.secretNumber.value.toString()=="-1") {
                 Toast.makeText(this.context, "First  press  \"Choose  secretnumber\"  button", Toast.LENGTH_SHORT).show()
             }
@@ -53,7 +53,16 @@ var cpt=0
             }
         }
 
-/////////////////////////////////observer/////////////////////////////////
+        _binding.idButtonRetry.setOnClickListener {
+            _binding.idChooseNumber.isEnabled=true
+            _binding.idButtonRetry.isVisible=false
+            secretNumberModel.setTurn()
+            _binding.idTextView1.text=""
+            _binding.idTextView4.text=""
+            _binding.idTextView2.text=""
+            _binding.idGuessNumber.text.clear()
+        }
+        /////////////////////////////////observer/////////////////////////////////
         secretNumberModel.secretNumber.observe(viewLifecycleOwner) {///////////////////reproduire cette observer pour le textwiev 2
             value ->
             if (value == SecretNumberModel.NO_SECRET_NUMBER) {
@@ -76,15 +85,17 @@ var cpt=0
                     _binding.idTextView2.text = "The secret number is lower"
             }
         }
-        /////////////////////////////////observer/////////////////////////////////
 
+        /////////////////////////////////observer/////////////////////////////////
         secretNumberModel.nbTurn.observe(viewLifecycleOwner){
             _binding.idTextView3.text ="Remaining turn: "+ secretNumberModel.nbTurn.value.toString()
             if (secretNumberModel.nbTurn.value.toString()=="0") {
-                _binding.idTextView4.text ="You've lost! The secret number was " + secretNumberModel.secretNumber.value.toString()
+                if (secretNumberModel.checkResult.value.toString()!="EQUAL") {
+                    _binding.idTextView4.text = "You've lost! The secret number was " + secretNumberModel.secretNumber.value.toString()
+                }
                 _binding.idButtonCheck.isEnabled = false
-                _binding.idChooseNumber.isEnabled=false
-                _binding.idButtonRetry.isVisible=true
+                _binding.idChooseNumber.isEnabled = false
+                _binding.idButtonRetry.isVisible = true
             }
         }
     }

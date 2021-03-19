@@ -54,10 +54,6 @@ class SecretNumberModel(state : SavedStateHandle, private val turn:Int,private v
             nbTurn.value == 0 -> {
                 nbTurn.value = 0
             }
-
-            else -> {
-                checkResult.value = CheckResult.EQUAL
-            }
         }
     }
 
