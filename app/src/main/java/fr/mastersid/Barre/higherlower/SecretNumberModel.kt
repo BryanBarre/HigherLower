@@ -31,6 +31,10 @@ class SecretNumberModel(state : SavedStateHandle, private val turn:Int,private v
         nbTurn.value=turn
     }
 
+    fun setResult(){
+        checkResult.value = CheckResult.NO_GUESS
+    }
+
     fun check(number:Int) {
         when {
             secretNumber.value == NO_SECRET_NUMBER -> {

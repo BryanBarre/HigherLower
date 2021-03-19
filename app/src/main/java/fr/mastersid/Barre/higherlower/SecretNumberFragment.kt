@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -33,11 +32,10 @@ class SecretNumberFragment: Fragment() {
         val  secretNumberModel: SecretNumberModel by viewModels(
                 factoryProducer = { SecretNumberfactory (this , args.turns ,args.max) })
 
-        //secretNumberModel.setTurn()
-
         _binding.idButtonChooseNumber.setOnClickListener {
             secretNumberModel.chooseSecretNumber()
-            _binding.idTextView4.text =""
+            secretNumberModel.setResult()
+
         }
         _binding.idButtonCheck.setOnClickListener {
             if (secretNumberModel.secretNumber.value.toString()=="-1") {
@@ -56,19 +54,14 @@ class SecretNumberFragment: Fragment() {
         secretNumberModel.secretNumber.observe(viewLifecycleOwner) {///////////////////reproduire cette observer pour le textwiev 2
             value ->
             System.out.println("-----------------------etape1")
-
             if (value == SecretNumberModel.NO_SECRET_NUMBER) {
                 _binding.idTextView1.text =""
                 _binding.idTextView2.text =""
-                _binding.idTextView3.visibility=View.INVISIBLE
+                _binding.idTextView3.text=""
                 _binding.idTextView4.text =""
-                _binding.idTextView4.visibility=View.INVISIBLE
             } else {
                 _binding.idButtonChooseNumber.isEnabled=false
                 _binding.idButtonCheck.isEnabled=true
-                _binding.idTextView3.visibility = View.VISIBLE
-                _binding.idTextView1.visibility = View.VISIBLE
-                _binding.idTextView2.visibility = View.VISIBLE
                 _binding.idTextView1.text = "Secret number chosen"
             }
         }
@@ -78,7 +71,13 @@ class SecretNumberFragment: Fragment() {
             value->
             System.out.println("-----------------------etape2")
             if (value==SecretNumberModel.CheckResult.EQUAL) {
-                _binding.idTextView2.text = "Well done"
+                if (secretNumberModel.secretNumber.value!=SecretNumberModel.NO_SECRET_NUMBER) {
+                    _binding.idTextView2.text = "Well done"
+                    _binding.idButtonCheck.isEnabled = false
+                    System.out.println("--------------------je le met a ON")
+                    _binding.idButtonChooseNumber.isEnabled = true
+
+                }
             }
             if (value==SecretNumberModel.CheckResult.GREATER) {
                 _binding.idTextView2.text = "The secret number is greater"
@@ -93,15 +92,15 @@ class SecretNumberFragment: Fragment() {
             System.out.println("-----------------------etape4")
         if (secretNumberModel.nbTurn.value.toString()=="0") {
             System.out.println("-----------------------etape4.1")
-
             if (secretNumberModel.checkResult.value.toString()!="EQUAL") {
                     System.out.println("-----------------------etape4.2")
-                    _binding.idTextView4.isVisible=true
                     _binding.idTextView4.text = "You've lost! The secret number was " + secretNumberModel.secretNumber.value.toString()
                     _binding.idButtonCheck.isEnabled=false
-                    _binding.idButtonChooseNumber.isEnabled=true
+                System.out.println("--------------------je le met aussi a ON")
+                _binding.idButtonChooseNumber.isEnabled=true
                 }
             }
+            if (secretNumberModel.secretNumber.value!=SecretNumberModel.NO_SECRET_NUMBER)
             _binding.idTextView3.text ="Remaining turn: "+ secretNumberModel.nbTurn.value.toString()
         }
     }
