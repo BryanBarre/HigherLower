@@ -37,6 +37,7 @@ class SecretNumberFragment: Fragment() {
 
         _binding.idButtonChooseNumber.setOnClickListener {
             secretNumberModel.chooseSecretNumber()
+            _binding.idTextView4.text =""
         }
         _binding.idButtonCheck.setOnClickListener {
             if (secretNumberModel.secretNumber.value.toString()=="-1") {
@@ -51,18 +52,6 @@ class SecretNumberFragment: Fragment() {
             }
         }
 
-        _binding.idButtonRetry.setOnClickListener {
-            secretNumberModel.retry()
-            /*
-            _binding.idGuessNumber.text.clear()
-            _binding.idButtonChooseNumber.isEnabled=true
-            _binding.idButtonRetry.isVisible=false
-            _binding.idTextView1.text =""
-            _binding.idTextView2.text =""
-            _binding.idTextView3.text =""
-            _binding.idTextView4.text =""
-*/
-        }
         /////////////////////////////////observer/////////////////////////////////
         secretNumberModel.secretNumber.observe(viewLifecycleOwner) {///////////////////reproduire cette observer pour le textwiev 2
             value ->
@@ -72,8 +61,9 @@ class SecretNumberFragment: Fragment() {
                 _binding.idTextView1.text =""
                 _binding.idTextView2.text =""
                 _binding.idTextView3.visibility=View.INVISIBLE
+                _binding.idTextView4.text =""
+
                 _binding.idTextView4.visibility=View.INVISIBLE
-                _binding.idButtonRetry.isVisible=false
             } else {
                 _binding.idButtonChooseNumber.isEnabled=false
                 _binding.idButtonCheck.isEnabled=true
@@ -95,35 +85,22 @@ class SecretNumberFragment: Fragment() {
                 _binding.idTextView2.text = "The secret number is greater"
             }
             if (value==SecretNumberModel.CheckResult.LOWER) {
-                    _binding.idTextView2.text = "The secret number is lower"
+                _binding.idTextView2.text = "The secret number is lower"
             }
         }
 
-        secretNumberModel.retryState.observe(viewLifecycleOwner) {
-            value->
-            System.out.println("-----------------------etape3")
-
-            if(value==SecretNumberModel.RETRY_TIME)
-
-            else{
-                _binding.idGuessNumber.text.clear()
-                _binding.idButtonChooseNumber.isEnabled=true
-                _binding.idButtonRetry.isVisible=false
-                _binding.idTextView1.text =""
-                _binding.idTextView2.text =""
-                _binding.idTextView3.text =""
-                _binding.idTextView4.text =""
-            }
-        }
         /////////////////////////////////observer/////////////////////////////////
         secretNumberModel.nbTurn.observe(viewLifecycleOwner){
             System.out.println("-----------------------etape4")
         if (secretNumberModel.nbTurn.value.toString()=="0") {
-                if (secretNumberModel.checkResult.value.toString()!="EQUAL") {
-                    _binding.idButtonRetry.isVisible=true
+            System.out.println("-----------------------etape4.1")
+
+            if (secretNumberModel.checkResult.value.toString()!="EQUAL") {
+                    System.out.println("-----------------------etape4.2")
+                    _binding.idTextView4.isVisible=true
                     _binding.idTextView4.text = "You've lost! The secret number was " + secretNumberModel.secretNumber.value.toString()
                     _binding.idButtonCheck.isEnabled=false
-                    _binding.idButtonRetry.isVisible=true
+                    _binding.idButtonChooseNumber.isEnabled=true
                 }
             }
             _binding.idTextView3.text ="Remaining turn: "+ secretNumberModel.nbTurn.value.toString()

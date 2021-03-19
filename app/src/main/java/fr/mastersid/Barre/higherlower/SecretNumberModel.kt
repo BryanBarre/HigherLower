@@ -12,7 +12,6 @@ class SecretNumberModel(state : SavedStateHandle, private val turn:Int,private v
 
     val secretNumber = MutableLiveData(NO_SECRET_NUMBER)
     val nbTurn=MutableLiveData(NO_TURN)
-    val retryState = MutableLiveData(RETRY_TIME)
 
     val checkResult = MutableLiveData(CheckResult.NO_GUESS)
 
@@ -20,23 +19,12 @@ class SecretNumberModel(state : SavedStateHandle, private val turn:Int,private v
     enum class CheckResult {
         LOWER, GREATER, EQUAL,NO_GUESS
     }
-    enum class CheckTurn{
-        NO_TURN_AVAILABLE,TURN_AVAILABLE
-    }
 
-    enum class State{
-        ON,OFF
-    }
 
     fun chooseSecretNumber() {
         secretNumber.value=(1..max).random()
         setTurn()
 
-    }
-
-    fun retry(){
-        retryState.value=1
-        secretNumber.value= NO_SECRET_NUMBER
     }
 
     fun setTurn(){
@@ -75,6 +63,5 @@ class SecretNumberModel(state : SavedStateHandle, private val turn:Int,private v
     companion  object {
         const  val  NO_SECRET_NUMBER = -1
         const  val  NO_TURN = -1
-        const val RETRY_TIME=-1
     }
 }
