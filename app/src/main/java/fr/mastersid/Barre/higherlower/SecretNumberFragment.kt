@@ -62,7 +62,6 @@ class SecretNumberFragment: Fragment() {
                 _binding.idTextView2.text =""
                 _binding.idTextView3.visibility=View.INVISIBLE
                 _binding.idTextView4.text =""
-
                 _binding.idTextView4.visibility=View.INVISIBLE
             } else {
                 _binding.idButtonChooseNumber.isEnabled=false
