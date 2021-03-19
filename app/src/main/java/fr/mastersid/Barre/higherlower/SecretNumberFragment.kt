@@ -35,6 +35,8 @@ class SecretNumberFragment: Fragment() {
         _binding.idButtonChooseNumber.setOnClickListener {
             secretNumberModel.chooseSecretNumber()
             secretNumberModel.setResult()
+            _binding.idTextView2.text =""
+            _binding.idTextView4.text =""
 
         }
         _binding.idButtonCheck.setOnClickListener {
@@ -74,7 +76,6 @@ class SecretNumberFragment: Fragment() {
                 if (secretNumberModel.secretNumber.value!=SecretNumberModel.NO_SECRET_NUMBER) {
                     _binding.idTextView2.text = "Well done"
                     _binding.idButtonCheck.isEnabled = false
-                    System.out.println("--------------------je le met a ON")
                     _binding.idButtonChooseNumber.isEnabled = true
 
                 }
@@ -96,7 +97,6 @@ class SecretNumberFragment: Fragment() {
                     System.out.println("-----------------------etape4.2")
                     _binding.idTextView4.text = "You've lost! The secret number was " + secretNumberModel.secretNumber.value.toString()
                     _binding.idButtonCheck.isEnabled=false
-                System.out.println("--------------------je le met aussi a ON")
                 _binding.idButtonChooseNumber.isEnabled=true
                 }
             }
