@@ -33,12 +33,10 @@ class SecretNumberFragment: Fragment() {
         val  secretNumberModel: SecretNumberModel by viewModels(
                 factoryProducer = { SecretNumberfactory (this , args.turns ,args.max) })
 
-        secretNumberModel.setTurn()
+        //secretNumberModel.setTurn()
 
-        _binding.idChooseNumber.setOnClickListener {
+        _binding.idButtonChooseNumber.setOnClickListener {
             secretNumberModel.chooseSecretNumber()
-            _binding.idChooseNumber.isEnabled=false
-            _binding.idButtonCheck.isEnabled=true
         }
         _binding.idButtonCheck.setOnClickListener {
             if (secretNumberModel.secretNumber.value.toString()=="-1") {
@@ -54,49 +52,81 @@ class SecretNumberFragment: Fragment() {
         }
 
         _binding.idButtonRetry.setOnClickListener {
-            _binding.idChooseNumber.isEnabled=true
-            _binding.idButtonRetry.isVisible=false
-            secretNumberModel.setTurn()
-            _binding.idTextView1.text=""
-            _binding.idTextView4.text=""
-            _binding.idTextView2.text=""
+            secretNumberModel.retry()
+            /*
             _binding.idGuessNumber.text.clear()
+            _binding.idButtonChooseNumber.isEnabled=true
+            _binding.idButtonRetry.isVisible=false
+            _binding.idTextView1.text =""
+            _binding.idTextView2.text =""
+            _binding.idTextView3.text =""
+            _binding.idTextView4.text =""
+*/
         }
         /////////////////////////////////observer/////////////////////////////////
         secretNumberModel.secretNumber.observe(viewLifecycleOwner) {///////////////////reproduire cette observer pour le textwiev 2
             value ->
+            System.out.println("-----------------------etape1")
+
             if (value == SecretNumberModel.NO_SECRET_NUMBER) {
-                _binding.idTextView1.visibility = View.INVISIBLE
+                _binding.idTextView1.text =""
+                _binding.idTextView2.text =""
+                _binding.idTextView3.visibility=View.INVISIBLE
+                _binding.idTextView4.visibility=View.INVISIBLE
+                _binding.idButtonRetry.isVisible=false
             } else {
+                _binding.idButtonChooseNumber.isEnabled=false
+                _binding.idButtonCheck.isEnabled=true
+                _binding.idTextView3.visibility = View.VISIBLE
                 _binding.idTextView1.visibility = View.VISIBLE
+                _binding.idTextView2.visibility = View.VISIBLE
                 _binding.idTextView1.text = "Secret number chosen"
             }
         }
-        /////////////////////////////////observer/////////////////////////////////
 
+        /////////////////////////////////observer/////////////////////////////////
         secretNumberModel.checkResult.observe(viewLifecycleOwner){
-            value->if (secretNumberModel.checkResult.value.toString()=="EQUAL") {
+            value->
+            System.out.println("-----------------------etape2")
+            if (value==SecretNumberModel.CheckResult.EQUAL) {
                 _binding.idTextView2.text = "Well done"
             }
-            if (secretNumberModel.checkResult.value.toString()=="GREATER") {
+            if (value==SecretNumberModel.CheckResult.GREATER) {
                 _binding.idTextView2.text = "The secret number is greater"
             }
-            if (secretNumberModel.checkResult.value.toString()=="LOWER") {
+            if (value==SecretNumberModel.CheckResult.LOWER) {
                     _binding.idTextView2.text = "The secret number is lower"
             }
         }
 
+        secretNumberModel.retryState.observe(viewLifecycleOwner) {
+            value->
+            System.out.println("-----------------------etape3")
+
+            if(value==SecretNumberModel.RETRY_TIME)
+
+            else{
+                _binding.idGuessNumber.text.clear()
+                _binding.idButtonChooseNumber.isEnabled=true
+                _binding.idButtonRetry.isVisible=false
+                _binding.idTextView1.text =""
+                _binding.idTextView2.text =""
+                _binding.idTextView3.text =""
+                _binding.idTextView4.text =""
+            }
+        }
         /////////////////////////////////observer/////////////////////////////////
         secretNumberModel.nbTurn.observe(viewLifecycleOwner){
-            _binding.idTextView3.text ="Remaining turn: "+ secretNumberModel.nbTurn.value.toString()
-            if (secretNumberModel.nbTurn.value.toString()=="0") {
+            System.out.println("-----------------------etape4")
+        if (secretNumberModel.nbTurn.value.toString()=="0") {
                 if (secretNumberModel.checkResult.value.toString()!="EQUAL") {
+                    _binding.idButtonRetry.isVisible=true
                     _binding.idTextView4.text = "You've lost! The secret number was " + secretNumberModel.secretNumber.value.toString()
+                    _binding.idButtonCheck.isEnabled=false
+                    _binding.idButtonRetry.isVisible=true
                 }
-                _binding.idButtonCheck.isEnabled = false
-                _binding.idChooseNumber.isEnabled = false
-                _binding.idButtonRetry.isVisible = true
             }
+            _binding.idTextView3.text ="Remaining turn: "+ secretNumberModel.nbTurn.value.toString()
         }
     }
 }
