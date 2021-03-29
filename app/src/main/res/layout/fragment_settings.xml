@@ -31,7 +31,7 @@
                 android:layout_weight="0"
                 android:hint="@string/enter_a_number"
                 android:autofillHints=""
-                android:inputType="numberPassword" />
+                android:inputType="number" />
         </LinearLayout>
 
         <LinearLayout
@@ -52,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
-                android:inputType="numberPassword"
+                android:inputType="number"
                 android:hint="@string/enter_a_number"
                 android:autofillHints="" />
         </LinearLayout>
@@ -61,14 +61,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <Button
                 android:id="@+id/idPlay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:text="@string/play" />
-
+            <Button
+                android:id="@+id/saveValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/save_values_as_favorites" />
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

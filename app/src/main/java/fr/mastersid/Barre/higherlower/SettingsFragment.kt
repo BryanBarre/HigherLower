@@ -7,9 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.navigation.fragment.findNavController
-import fr.mastersid.Barre.higherlower.databinding.FragmentSecretnumberBinding
 import fr.mastersid.Barre.higherlower.databinding.FragmentSettingsBinding
 
 /**
@@ -28,17 +26,42 @@ class SettingsFragment:Fragment() {
 
     override fun onViewCreated (view : View, savedInstanceState : Bundle?) {
         super.onViewCreated (view , savedInstanceState )
-
-        _binding.idSecretNumbeMaxValue.setTransformationMethod (null);
-        _binding.idTurns.setTransformationMethod (null);
-
+        val settingsModel: SettingsModel by viewModels(factoryProducer = {SettingsModelFactory(context)})
 
         _binding.idPlay.setOnClickListener {
-            val turns = _binding.idTurns.text.toString().toInt()
-            val max = _binding.idSecretNumbeMaxValue.text.toString().toInt()
-            val action = SettingsFragmentDirections.actionSettingsFragmentToSecretNumberFragment(turns,max)
-            findNavController().navigate(action)
+            try {
+                val turns = _binding.idTurns.text.toString().toInt()
+                val max = _binding.idSecretNumbeMaxValue.text.toString().toInt()
+                val action = SettingsFragmentDirections.actionSettingsFragmentToSecretNumberFragment(turns,max)
+                findNavController().navigate(action)
+            }
+            catch (error: NumberFormatException) {
+                Toast.makeText(this.context, "Incorrect number", Toast.LENGTH_SHORT).show()
+            }
         }
-     }
+
+        _binding.saveValue.setOnClickListener {
+            try {
+                val turns = _binding.idTurns.text.toString().toInt()
+                val max = _binding.idSecretNumbeMaxValue.text.toString().toInt()
+                settingsModel.save(turns,max)
+            }catch (error: NumberFormatException) {
+                Toast.makeText(this.context, "Incorrect number", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        settingsModel.favorite.observe(viewLifecycleOwner){
+            value ->
+            if ( value != SettingsModel.NO_VALUE1 && _binding.idTurns.text.toString().isEmpty()) {
+                _binding.idTurns.setText("$value")
+            }
+        }
+        settingsModel.favorite2.observe(viewLifecycleOwner){
+            value ->
+            if ( value != SettingsModel.NO_VALUE2 && _binding.idSecretNumbeMaxValue.text.toString().isEmpty()) {
+                _binding.idSecretNumbeMaxValue.setText("$value")
+            }
+        }
+    }
 }
 

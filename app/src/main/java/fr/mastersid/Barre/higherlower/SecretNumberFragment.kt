@@ -26,7 +26,7 @@ class SecretNumberFragment: Fragment() {
 
 
     override fun onViewCreated ( view : View , savedInstanceState : Bundle ?) {
-        _binding.idGuessNumber.setTransformationMethod (null);
+        //_binding.idGuessNumber.setTransformationMethod (null);//utilisé avec inputType password pour avoir uniquement des chiffres
         super.onViewCreated (view , savedInstanceState )
         val args : SecretNumberFragmentArgs by navArgs()
         val  secretNumberModel: SecretNumberModel by viewModels(
@@ -34,7 +34,7 @@ class SecretNumberFragment: Fragment() {
 
         _binding.idButtonChooseNumber.setOnClickListener {
             secretNumberModel.chooseSecretNumber()
-            secretNumberModel.setResult()
+            secretNumberModel.setNoGuess()
             _binding.idTextView2.text =""
             _binding.idTextView4.text =""
 
@@ -55,7 +55,6 @@ class SecretNumberFragment: Fragment() {
         /////////////////////////////////observer/////////////////////////////////
         secretNumberModel.secretNumber.observe(viewLifecycleOwner) {///////////////////reproduire cette observer pour le textwiev 2
             value ->
-            System.out.println("-----------------------etape1")
             if (value == SecretNumberModel.NO_SECRET_NUMBER) {
                 _binding.idTextView1.text =""
                 _binding.idTextView2.text =""
@@ -71,7 +70,6 @@ class SecretNumberFragment: Fragment() {
         /////////////////////////////////observer/////////////////////////////////
         secretNumberModel.checkResult.observe(viewLifecycleOwner){
             value->
-            System.out.println("-----------------------etape2")
             if (value==SecretNumberModel.CheckResult.EQUAL) {
                 if (secretNumberModel.secretNumber.value!=SecretNumberModel.NO_SECRET_NUMBER) {
                     _binding.idTextView2.text = "Well done"
@@ -86,15 +84,13 @@ class SecretNumberFragment: Fragment() {
             if (value==SecretNumberModel.CheckResult.LOWER) {
                 _binding.idTextView2.text = "The secret number is lower"
             }
+
         }
 
         /////////////////////////////////observer/////////////////////////////////
         secretNumberModel.nbTurn.observe(viewLifecycleOwner){
-            System.out.println("-----------------------etape4")
         if (secretNumberModel.nbTurn.value.toString()=="0") {
-            System.out.println("-----------------------etape4.1")
             if (secretNumberModel.checkResult.value.toString()!="EQUAL") {
-                    System.out.println("-----------------------etape4.2")
                     _binding.idTextView4.text = "You've lost! The secret number was " + secretNumberModel.secretNumber.value.toString()
                     _binding.idButtonCheck.isEnabled=false
                 _binding.idButtonChooseNumber.isEnabled=true

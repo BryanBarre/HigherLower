@@ -12,7 +12,6 @@ class SecretNumberModel(state : SavedStateHandle, private val turn:Int,private v
 
     val secretNumber = MutableLiveData(NO_SECRET_NUMBER)
     val nbTurn=MutableLiveData(NO_TURN)
-
     val checkResult = MutableLiveData(CheckResult.NO_GUESS)
 
 
@@ -23,15 +22,12 @@ class SecretNumberModel(state : SavedStateHandle, private val turn:Int,private v
 
     fun chooseSecretNumber() {
         secretNumber.value=(1..max).random()
-        setTurn()
-
-    }
-
-    fun setTurn(){
         nbTurn.value=turn
+
     }
 
-    fun setResult(){
+
+    fun setNoGuess(){
         checkResult.value = CheckResult.NO_GUESS
     }
 
@@ -57,7 +53,6 @@ class SecretNumberModel(state : SavedStateHandle, private val turn:Int,private v
             }
             nbTurn.value == 0 -> {
                 nbTurn.value = 0
-
             }
         }
     }
