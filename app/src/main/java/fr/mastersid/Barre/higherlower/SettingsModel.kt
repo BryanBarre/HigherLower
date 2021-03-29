@@ -23,8 +23,7 @@ class SettingsModel(private val repository: FavoriteRepository):ViewModel() {
         viewModelScope.launch ( Dispatchers .IO) {
             _favorite.postValue (repository.loadFavoriteTurn())
             _favorite2.postValue (repository.loadFavoriteMax())
-            System.out.println("****-------------------------"+repository.loadFavoriteTurn())
-            System.out.println("****-------------------------"+repository.loadFavoriteMax())
+
 
         }
     }

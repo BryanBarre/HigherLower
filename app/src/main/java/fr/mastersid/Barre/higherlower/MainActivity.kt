@@ -1,9 +1,11 @@
 package fr.mastersid.Barre.higherlower
 
 import android.os.Bundle
-import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import fr.mastersid.Barre.higherlower.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity () {
@@ -11,5 +13,10 @@ class MainActivity : AppCompatActivity () {
         super.onCreate (savedInstanceState)//savestate handle
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView (binding.root)
+
+        setSupportActionBar(binding.toolbar)
+        val navController = findNavController (R.id.nav_host_fragment )
+        val appBarConfiguration = AppBarConfiguration ( navController . graph )
+        binding . toolbar . setupWithNavController ( navController , appBarConfiguration )
     }
 }

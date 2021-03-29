@@ -1,4 +1,4 @@
-package fr.mastersid.Barre.higherlower;
+package fr.mastersid.Barre.higherlower
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -19,7 +19,7 @@ class SecretNumberFragment: Fragment() {
         inflater : LayoutInflater,
         container : ViewGroup?,
         savedInstanceState : Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSecretnumberBinding.inflate(inflater)
         return _binding.root
     }

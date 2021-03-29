@@ -14,8 +14,7 @@ class FavoriteSharedPreferencesBackEnd ( context : Context ?): FavoriteBackEnd {
         sharedPreferences ?. edit () ?. apply {
             putInt (FAVORITE_VALUE1 , turn)
             putInt (FAVORITE_VALUE2 , max)
-            System.out.println("(((((((((((((((((((((((((((((((((("+FAVORITE_VALUE1+"(((("+turn)
-            System.out.println("(((((((((((((((((((((((((((((((((("+FAVORITE_VALUE2+"(((("+max)
+
             apply ()
         }
         Log .d(" Favorite ", " saved ")
@@ -24,14 +23,12 @@ class FavoriteSharedPreferencesBackEnd ( context : Context ?): FavoriteBackEnd {
     override suspend fun loadFavoriteTurn (): Int {
         Log.d("Favorite", "loading... ")
         val turns = sharedPreferences ?.getInt(FAVORITE_VALUE1,FavoriteBackEnd.NO_VALUE1)?:FavoriteBackEnd.NO_VALUE1
-        System.out.println("---------------***************turn= "+turns)
         Log .d(" Favorite ", " loaded ")
         return turns
     }
     override suspend fun loadFavoriteMax (): Int {
         Log.d("Favorite", "loading... ")
         val max = sharedPreferences?.getInt(FAVORITE_VALUE2,FavoriteBackEnd.NO_VALUE2)?:FavoriteBackEnd.NO_VALUE2
-        System.out.println("---------------***************max= "+max)
         Log .d(" Favorite ", " loaded ")
         return max
     }

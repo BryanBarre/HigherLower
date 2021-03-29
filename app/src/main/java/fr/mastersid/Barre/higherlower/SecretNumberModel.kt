@@ -3,7 +3,6 @@ package fr.mastersid.Barre.higherlower
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import kotlin.math.absoluteValue
 
 /**
  *Created by Bryan BARRE on 18/02/2021.
