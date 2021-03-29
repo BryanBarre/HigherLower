@@ -26,4 +26,10 @@
             android:name="max"
             app:argType="integer" />
     </fragment>
+
+    <fragment
+        android:id="@+id/helpFragment"
+        android:name="fr.mastersid.Barre.higherlower.HelpFragment"
+        android:label="Help"
+        tools:layout="@layout/fragment_help"/>
 </navigation>
