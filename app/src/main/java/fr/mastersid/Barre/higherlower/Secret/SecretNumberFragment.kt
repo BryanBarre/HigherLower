@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import fr.mastersid.Barre.higherlower.Secret.SecretNumberFragmentArgs
 import fr.mastersid.Barre.higherlower.databinding.FragmentSecretnumberBinding
+import java.lang.reflect.InvocationTargetException
 
 /**
  * Created by Bryan BARRE on 08/03/2021.
@@ -32,6 +33,7 @@ class SecretNumberFragment: Fragment() {
         val args : SecretNumberFragmentArgs by navArgs()
         val  secretNumberModel: SecretNumberModel by viewModels(
                 factoryProducer = { SecretNumberfactory (this , args.turns ,args.max) })
+
 
         _binding.idButtonChooseNumber.setOnClickListener {
             secretNumberModel.chooseSecretNumber()
