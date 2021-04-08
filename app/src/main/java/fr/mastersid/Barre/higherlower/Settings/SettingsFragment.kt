@@ -1,4 +1,4 @@
-package fr.mastersid.Barre.higherlower
+package fr.mastersid.Barre.higherlower.Settings
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import fr.mastersid.Barre.higherlower.Settings.SettingsFragmentDirections
 import fr.mastersid.Barre.higherlower.databinding.FragmentSettingsBinding
 
 /**
@@ -26,13 +27,13 @@ class SettingsFragment:Fragment() {
 
     override fun onViewCreated (view : View, savedInstanceState : Bundle?) {
         super.onViewCreated (view , savedInstanceState )
-        val settingsModel: SettingsModel by viewModels(factoryProducer = {SettingsModelFactory(context)})
+        val settingsModel: SettingsModel by viewModels(factoryProducer = { SettingsModelFactory(context) })
 
         _binding.idPlay.setOnClickListener {
             try {
                 val turns = _binding.idTurns.text.toString().toInt()
                 val max = _binding.idSecretNumbeMaxValue.text.toString().toInt()
-                val action = SettingsFragmentDirections.actionSettingsFragmentToSecretNumberFragment(turns,max)
+                val action = SettingsFragmentDirections.actionSettingsFragmentToSecretNumberFragment(turns, max)
                 findNavController().navigate(action)
             }
             catch (error: NumberFormatException) {

@@ -1,8 +1,10 @@
-package fr.mastersid.Barre.higherlower
+package fr.mastersid.Barre.higherlower.Settings
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import fr.mastersid.Barre.higherlower.Favorite.FavoriteRepository
+import fr.mastersid.Barre.higherlower.Favorite.FavoriteSharedPreferencesBackEnd
 
 /**
  *Created by Bryan BARRE on 22/03/2021.

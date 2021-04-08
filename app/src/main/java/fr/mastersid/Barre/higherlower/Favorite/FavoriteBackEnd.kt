@@ -1,4 +1,4 @@
-package fr.mastersid.Barre.higherlower
+package fr.mastersid.Barre.higherlower.Favorite
 
 /**
  *Created by Bryan BARRE on 22/03/2021.

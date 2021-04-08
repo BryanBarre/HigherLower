@@ -1,10 +1,11 @@
-package fr.mastersid.Barre.higherlower
+package fr.mastersid.Barre.higherlower.Settings
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import fr.mastersid.Barre.higherlower.Favorite.FavoriteRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

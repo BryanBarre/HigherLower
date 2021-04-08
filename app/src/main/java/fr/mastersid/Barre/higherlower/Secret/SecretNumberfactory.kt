@@ -1,4 +1,4 @@
-package fr.mastersid.Barre.higherlower
+package fr.mastersid.Barre.higherlower.Secret
 
 import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.SavedStateHandle

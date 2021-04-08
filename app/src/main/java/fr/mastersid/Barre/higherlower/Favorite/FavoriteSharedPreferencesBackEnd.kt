@@ -1,4 +1,4 @@
-package fr.mastersid.Barre.higherlower
+package fr.mastersid.Barre.higherlower.Favorite
 
 import android.content.Context
 import android.util.Log
@@ -14,7 +14,6 @@ class FavoriteSharedPreferencesBackEnd ( context : Context ?): FavoriteBackEnd {
         sharedPreferences ?. edit () ?. apply {
             putInt (FAVORITE_VALUE1 , turn)
             putInt (FAVORITE_VALUE2 , max)
-
             apply ()
         }
         Log .d(" Favorite ", " saved ")
@@ -22,17 +21,17 @@ class FavoriteSharedPreferencesBackEnd ( context : Context ?): FavoriteBackEnd {
 
     override suspend fun loadFavoriteTurn (): Int {
         Log.d("Favorite", "loading... ")
-        val turns = sharedPreferences ?.getInt(FAVORITE_VALUE1,FavoriteBackEnd.NO_VALUE1)?:FavoriteBackEnd.NO_VALUE1
+        val turns = sharedPreferences ?.getInt(FAVORITE_VALUE1, FavoriteBackEnd.NO_VALUE1)?: FavoriteBackEnd.NO_VALUE1
         Log .d(" Favorite ", " loaded ")
         return turns
     }
+
     override suspend fun loadFavoriteMax (): Int {
         Log.d("Favorite", "loading... ")
-        val max = sharedPreferences?.getInt(FAVORITE_VALUE2,FavoriteBackEnd.NO_VALUE2)?:FavoriteBackEnd.NO_VALUE2
+        val max = sharedPreferences?.getInt(FAVORITE_VALUE2, FavoriteBackEnd.NO_VALUE2)?: FavoriteBackEnd.NO_VALUE2
         Log .d(" Favorite ", " loaded ")
         return max
     }
-
 
     companion object {
         private const val FILE_NAME = " favorite_shared_preferences_file "

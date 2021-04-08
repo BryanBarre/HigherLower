@@ -6,7 +6,7 @@
     app:startDestination="@id/settingsFragment">
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="fr.mastersid.Barre.higherlower.SettingsFragment"
+        android:name="fr.mastersid.Barre.higherlower.Settings.SettingsFragment"
         android:label="SettingsFragment"
         tools:layout="@layout/fragment_settings">
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/secretNumberFragment"
-        android:name="fr.mastersid.Barre.higherlower.SecretNumberFragment"
+        android:name="fr.mastersid.Barre.higherlower.Secret.SecretNumberFragment"
         android:label="SecretNumberFragment"
         tools:layout="@layout/fragment_secretnumber">
 

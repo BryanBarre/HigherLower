@@ -1,4 +1,4 @@
-package fr.mastersid.Barre.higherlower
+package fr.mastersid.Barre.higherlower.Secret
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import fr.mastersid.Barre.higherlower.Secret.SecretNumberFragmentArgs
 import fr.mastersid.Barre.higherlower.databinding.FragmentSecretnumberBinding
 
 /**
@@ -70,18 +71,18 @@ class SecretNumberFragment: Fragment() {
         /////////////////////////////////observer/////////////////////////////////
         secretNumberModel.checkResult.observe(viewLifecycleOwner){
             value->
-            if (value==SecretNumberModel.CheckResult.EQUAL) {
-                if (secretNumberModel.secretNumber.value!=SecretNumberModel.NO_SECRET_NUMBER) {
+            if (value== SecretNumberModel.CheckResult.EQUAL) {
+                if (secretNumberModel.secretNumber.value!= SecretNumberModel.NO_SECRET_NUMBER) {
                     _binding.idTextView2.text = "Well done"
                     _binding.idButtonCheck.isEnabled = false
                     _binding.idButtonChooseNumber.isEnabled = true
 
                 }
             }
-            if (value==SecretNumberModel.CheckResult.GREATER) {
+            if (value== SecretNumberModel.CheckResult.GREATER) {
                 _binding.idTextView2.text = "The secret number is greater"
             }
-            if (value==SecretNumberModel.CheckResult.LOWER) {
+            if (value== SecretNumberModel.CheckResult.LOWER) {
                 _binding.idTextView2.text = "The secret number is lower"
             }
 
@@ -96,7 +97,7 @@ class SecretNumberFragment: Fragment() {
                 _binding.idButtonChooseNumber.isEnabled=true
                 }
             }
-            if (secretNumberModel.secretNumber.value!=SecretNumberModel.NO_SECRET_NUMBER)
+            if (secretNumberModel.secretNumber.value!= SecretNumberModel.NO_SECRET_NUMBER)
             _binding.idTextView3.text ="Remaining turn: "+ secretNumberModel.nbTurn.value.toString()
         }
     }
