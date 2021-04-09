@@ -10,4 +10,5 @@
     <string name="secret_number_is_from_1_to">Secret number is from 1 to</string>
     <string name="retry">Retry</string>
     <string name="save_values_as_favorites">SAVE VALUES AS FAVORITES</string>
+    <string name="help">Help</string>
 </resources>

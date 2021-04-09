@@ -31,5 +31,5 @@
         android:id="@+id/helpFragment"
         android:name="fr.mastersid.Barre.higherlower.HelpFragment"
         android:label="Help"
-        tools:layout="@layout/fragment_help"/>
+        tools:layout="@layout/fragment_help"/><action android:id="@+id/action_global_secretNumberFragment" app:destination="@id/secretNumberFragment"/>
 </navigation>
