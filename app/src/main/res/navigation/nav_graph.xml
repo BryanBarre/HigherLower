@@ -4,32 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/settingsFragment">
+
+    <fragment
+        android:id="@+id/secretNumberFragment"
+        android:name="fr.mastersid.martinez.higherlower.SecretNumberFragment"
+        android:label="@string/secret_number_fragment_label"
+        tools:layout="@layout/fragment_secret_number">
+        <argument
+            android:name="max"
+            app:argType="integer"/>
+        <argument
+            android:name="turns"
+            app:argType="integer"/>
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="fr.mastersid.Barre.higherlower.Settings.SettingsFragment"
-        android:label="SettingsFragment"
-        tools:layout="@layout/fragment_settings">
+        android:name="fr.mastersid.martinez.higherlower.SettingsFragment"
+        android:label="@string/settings_fragment_label"
+        tools:layout="@layout/fragment_secret_number">
         <action
             android:id="@+id/action_settingsFragment_to_secretNumberFragment"
             app:destination="@id/secretNumberFragment" />
     </fragment>
     <fragment
-        android:id="@+id/secretNumberFragment"
-        android:name="fr.mastersid.Barre.higherlower.Secret.SecretNumberFragment"
-        android:label="SecretNumberFragment"
-        tools:layout="@layout/fragment_secretnumber">
-
-        <argument
-            android:name="turns"
-            app:argType="integer" />
-        <argument
-            android:name="max"
-            app:argType="integer" />
-    </fragment>
-
-    <fragment
         android:id="@+id/helpFragment"
-        android:name="fr.mastersid.Barre.higherlower.HelpFragment"
-        android:label="Help"
+        android:name="fr.mastersid.martinez.higherlower.HelpFragment"
+        android:label="@string/help_fragment_label"
         tools:layout="@layout/fragment_help"/><action android:id="@+id/action_global_secretNumberFragment" app:destination="@id/secretNumberFragment"/>
 </navigation>
